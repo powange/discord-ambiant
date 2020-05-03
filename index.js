@@ -118,7 +118,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     if (oldUserChannel !== null) {
         let config = configs.getConfigOfGuild(oldUserChannel.guild);
         if (config && config.voiceChannelID === oldUserChannel.id && clientIsInVoiceChannel(oldUserChannel)) {
-            if (oldUserChannel.members.size === 1) {
+            if (oldUserChannel.members.filter(gm => gm.user.bot === false).size === 1) {
                 oldUserChannel.leave();
             }
         }
